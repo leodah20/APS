@@ -48,7 +48,12 @@
                 </div>
 
                 <div class="group-photo-container">
-                    <img src="img/foto.jpg" alt="Foto do integrante" class="group-photo">
+                    <img src="img/foto.jpg" alt="Foto do integrante" class="group-photo"
+                         onerror="this.style.display='none'; document.getElementById('foto-placeholder').style.display='flex';">
+                    <div id="foto-placeholder" class="photo-placeholder" style="display:none;">
+                        <span>📸</span>
+                        <p>Adicione sua foto em <strong>img/foto.jpg</strong></p>
+                    </div>
                 </div>
 
                 <h2>Integrante</h2>
