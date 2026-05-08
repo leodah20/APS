@@ -25,7 +25,7 @@
     </div>
 
     <header class="page-header">
-        <h1>🛠️ Ferramentas Interativas</h1>
+        <h1>Ferramentas Interativas</h1>
         <p>Calcule sua pegada de carbono, simule energia solar e teste seus conhecimentos.</p>
     </header>
 
@@ -34,9 +34,9 @@
             <div class="container">
 
                 <div class="tab-nav">
-                    <button class="tab-btn active" onclick="abrirTab('co2', this)">🌍 Pegada de CO₂</button>
-                    <button class="tab-btn" onclick="abrirTab('solar', this)">☀️ Simulador Solar</button>
-                    <button class="tab-btn" onclick="abrirTab('quiz', this)">🧠 Quiz</button>
+                    <button class="tab-btn active" onclick="abrirTab('co2', this)">Pegada de CO₂</button>
+                    <button class="tab-btn" onclick="abrirTab('solar', this)">Simulador Solar</button>
+                    <button class="tab-btn" onclick="abrirTab('quiz', this)">Quiz</button>
                 </div>
 
                 <!-- ===== ABA CO2 ===== -->
@@ -48,7 +48,7 @@
                                 <p>Descubra quanto CO₂ você emite por ano e veja como reduzir seu impacto.</p>
 
                                 <div class="form-group">
-                                    <label for="transporte">🚗 Meio de transporte principal</label>
+                                    <label for="transporte">Meio de transporte principal</label>
                                     <select id="transporte" name="transporte" onchange="toggleDistancia(this)" required>
                                         <option value="" disabled selected>Selecione...</option>
                                         <option value="gasolina">Carro a gasolina / diesel</option>
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="form-group" id="grupo-distancia">
-                                    <label>📏 Distância percorrida por dia</label>
+                                    <label>Distância percorrida por dia</label>
                                     <div class="radio-group">
                                         <label class="radio-label"><input type="radio" name="distancia" value="menos10"> Menos de 10 km</label>
                                         <label class="radio-label"><input type="radio" name="distancia" value="10a30"> 10 a 30 km</label>
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="energia">⚡ Valor médio da sua conta de luz por mês</label>
+                                    <label for="energia">Valor médio da sua conta de luz por mês</label>
                                     <select id="energia" name="energia" required>
                                         <option value="" disabled selected>Selecione...</option>
                                         <option value="menos100">Menos de R$ 100</option>
@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>🥩 Alimentação</label>
+                                    <label>Alimentação</label>
                                     <div class="radio-group">
                                         <label class="radio-label"><input type="radio" name="dieta" value="carne_diaria" required> Como carne vermelha quase todo dia</label>
                                         <label class="radio-label"><input type="radio" name="dieta" value="carne_semanal"> Como carne algumas vezes por semana</label>
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="viagem">✈️ Viagens aéreas por ano</label>
+                                    <label for="viagem">Viagens aéreas por ano</label>
                                     <select id="viagem" name="viagem" required>
                                         <option value="" disabled selected>Selecione...</option>
                                         <option value="nenhum">Não viajo de avião</option>
@@ -117,7 +117,7 @@
                                 <p>Descubra se vale a pena instalar energia solar na sua residência com dados reais do mercado brasileiro.</p>
 
                                 <div class="form-group">
-                                    <label for="estado">📍 Seu estado</label>
+                                    <label for="estado">Seu estado</label>
                                     <select id="estado" required>
                                         <option value="" disabled selected>Selecione...</option>
                                         <option value="AC">Acre (AC)</option>
@@ -151,12 +151,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="conta-solar">💰 Valor médio da sua conta de luz (R$)</label>
+                                    <label for="conta-solar">Valor médio da sua conta de luz (R$)</label>
                                     <input type="number" id="conta-solar" min="50" max="99999" placeholder="Ex: 350" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>🏠 Tipo de imóvel</label>
+                                    <label>Tipo de imóvel</label>
                                     <div class="radio-group">
                                         <label class="radio-label"><input type="radio" name="imovel" value="proprio" required> Próprio — posso instalar painéis</label>
                                         <label class="radio-label"><input type="radio" name="imovel" value="alugado"> Alugado / Não tenho telhado disponível</label>

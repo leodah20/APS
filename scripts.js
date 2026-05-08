@@ -130,12 +130,12 @@ function calcularSolar(event) {
     var html = '<div class="co2-resultado">' +
         '<h3>Resultado da Simulação — ' + estado + '</h3>' +
         '<div class="solar-cards">' +
-            '<div class="solar-card"><span class="solar-icon">☀️</span><span class="solar-val">' + paineis + '</span><span class="solar-label">painéis (550 W)</span></div>' +
-            '<div class="solar-card"><span class="solar-icon">⚡</span><span class="solar-val">' + kwpReal.toFixed(2) + ' kWp</span><span class="solar-label">potência do sistema</span></div>' +
-            '<div class="solar-card"><span class="solar-icon">💰</span><span class="solar-val">R$ ' + custoInstalacao.toLocaleString('pt-BR') + '</span><span class="solar-label">investimento estimado</span></div>' +
-            '<div class="solar-card"><span class="solar-icon">📉</span><span class="solar-val">R$ ' + Math.round(economiasMensal) + '/mês</span><span class="solar-label">economia na conta</span></div>' +
-            '<div class="solar-card"><span class="solar-icon">⏱️</span><span class="solar-val">' + payback + ' anos</span><span class="solar-label">retorno do investimento</span></div>' +
-            '<div class="solar-card"><span class="solar-icon">🌱</span><span class="solar-val">' + co2Anual + ' t</span><span class="solar-label">CO₂ evitado/ano</span></div>' +
+            '<div class="solar-card"><span class="solar-val">' + paineis + '</span><span class="solar-label">painéis (550 W)</span></div>' +
+            '<div class="solar-card"><span class="solar-val">' + kwpReal.toFixed(2) + ' kWp</span><span class="solar-label">potência do sistema</span></div>' +
+            '<div class="solar-card"><span class="solar-val">R$ ' + custoInstalacao.toLocaleString('pt-BR') + '</span><span class="solar-label">investimento estimado</span></div>' +
+            '<div class="solar-card"><span class="solar-val">R$ ' + Math.round(economiasMensal) + '/mês</span><span class="solar-label">economia na conta</span></div>' +
+            '<div class="solar-card"><span class="solar-val">' + payback + ' anos</span><span class="solar-label">retorno do investimento</span></div>' +
+            '<div class="solar-card"><span class="solar-val">' + co2Anual + ' t</span><span class="solar-label">CO₂ evitado/ano</span></div>' +
         '</div>' +
         '<div class="co2-comparacao" style="border-left:4px solid ' + (viavel ? 'var(--verde)' : 'var(--amarelo)') + '">' +
             '<p>' + (viavel
@@ -525,7 +525,7 @@ function resetCalculadora() {
 window.addEventListener('load', function() {
     var toast = document.getElementById('toast');
     if (toast) {
-        toast.textContent = '🌱 Bem-vindo ao EcoFuturo!';
+        toast.textContent = 'Bem-vindo ao EcoFuturo';
         toast.classList.add('toast-visible');
         setTimeout(function() {
             toast.classList.remove('toast-visible');
