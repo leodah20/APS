@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de CO₂ — EcoFuturo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span>EcoFuturo</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="content.html" class="nav-link">O Tema</a>
+                <a href="calculadora.html" class="nav-link active">Calculadora</a>
+                <a href="contact.html" class="nav-link">Contato</a>
+                <a href="about.html" class="nav-link">Sobre o Grupo</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="page-header">
+        <h1>🌍 Calculadora de Pegada de Carbono</h1>
+        <p>Descubra quanto CO₂ você emite por ano e veja como reduzir seu impacto no meio ambiente.</p>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="form-page-wrapper">
+                    <div class="form-container">
+
+                        <form id="form-co2" onsubmit="calcularCO2(event)">
+                            <h2>Seus Hábitos</h2>
+                            <p>Responda as perguntas abaixo para calcular sua pegada de carbono estimada anual.</p>
+
+                            <div class="form-group">
+                                <label for="transporte">🚗 Meio de transporte principal</label>
+                                <select id="transporte" name="transporte" onchange="toggleDistancia(this)" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="gasolina">Carro a gasolina / diesel</option>
+                                    <option value="flex">Carro flex (usa etanol)</option>
+                                    <option value="moto">Motocicleta</option>
+                                    <option value="publico">Transporte público (ônibus / metrô)</option>
+                                    <option value="bicicleta">Bicicleta / a pé</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="grupo-distancia">
+                                <label>📏 Distância percorrida por dia</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="distancia" value="menos10"> Menos de 10 km</label>
+                                    <label class="radio-label"><input type="radio" name="distancia" value="10a30"> 10 a 30 km</label>
+                                    <label class="radio-label"><input type="radio" name="distancia" value="30a60"> 30 a 60 km</label>
+                                    <label class="radio-label"><input type="radio" name="distancia" value="mais60"> Mais de 60 km</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="energia">⚡ Valor médio da sua conta de luz por mês</label>
+                                <select id="energia" name="energia" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="menos100">Menos de R$ 100</option>
+                                    <option value="100a200">R$ 100 a R$ 200</option>
+                                    <option value="200a400">R$ 200 a R$ 400</option>
+                                    <option value="mais400">Mais de R$ 400</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>🥩 Alimentação</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="dieta" value="carne_diaria" required> Como carne vermelha quase todo dia</label>
+                                    <label class="radio-label"><input type="radio" name="dieta" value="carne_semanal"> Como carne algumas vezes por semana</label>
+                                    <label class="radio-label"><input type="radio" name="dieta" value="vegetariano"> Sou principalmente vegetariano</label>
+                                    <label class="radio-label"><input type="radio" name="dieta" value="vegano"> Sou vegano</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="viagem">✈️ Viagens aéreas por ano</label>
+                                <select id="viagem" name="viagem" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="nenhum">Não viajo de avião</option>
+                                    <option value="domestico">1 a 2 voos domésticos</option>
+                                    <option value="internacional">3+ domésticos ou 1 internacional</option>
+                                    <option value="multiplos">Voos internacionais frequentes</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn-submit">Calcular minha pegada 🌍</button>
+                        </form>
+
+                        <div id="resultado-co2" style="display:none;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌱</span>
+                    <strong>EcoFuturo</strong>
+                    <p>Trabalho APS 2026/1 — Ciência da Computação — UNIP</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Início</a>
+                    <a href="content.html">O Tema</a>
+                    <a href="calculadora.html">Calculadora</a>
+                    <a href="contact.html">Contato</a>
+                    <a href="about.html">Sobre o Grupo</a>
+                </nav>
+            </div>
+            <p class="footer-copy">&copy; 2026 EcoFuturo — Atividades Práticas Supervisionadas — UNIP</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
