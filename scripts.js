@@ -40,7 +40,7 @@ function normalCard(card) {
     card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
 }
 
-// validação do formulário de contato antes de enviar
+// validação e envio do formulário via Formspree
 function validarFormulario(event) {
     event.preventDefault();
 
@@ -72,11 +72,33 @@ function validarFormulario(event) {
         return;
     }
 
-    var ok = document.getElementById('form-success');
-    if (ok) {
-        ok.style.display = 'block';
-        ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    var form = event.target;
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
 
-    event.target.reset();
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response) {
+        if (response.ok) {
+            var ok = document.getElementById('form-success');
+            if (ok) {
+                ok.style.display = 'block';
+                ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            form.reset();
+        } else {
+            alert('Erro ao enviar. Tente novamente.');
+        }
+    })
+    .catch(function() {
+        alert('Erro de conexão. Verifique sua internet e tente novamente.');
+    })
+    .finally(function() {
+        btn.disabled = false;
+        btn.textContent = 'Enviar Mensagem ✉️';
+    });
 }
