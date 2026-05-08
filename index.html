@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFuturo — Energias Renováveis no Brasil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <div id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span>EcoFuturo</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Início</a>
+                <a href="content.html" class="nav-link">O Tema</a>
+                <a href="contact.html" class="nav-link">Contato</a>
+                <a href="about.html" class="nav-link">Sobre o Grupo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Energias Renováveis</h1>
+            <h2>Construindo um Futuro Sustentável para o Brasil</h2>
+            <p>
+                Explore as principais fontes de energia limpa e descubra como elas podem
+                <strong>transformar nossa relação com o meio ambiente</strong> e combater as
+                mudanças climáticas.
+            </p>
+            <a href="content.html" class="btn-primary">Explorar o Tema</a>
+        </div>
+    </section>
+
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <main>
+
+        <!-- Introdução -->
+        <section class="section" id="introducao">
+            <div class="container">
+                <h2>Por que as Energias Renováveis São Essenciais?</h2>
+                <p>
+                    O mundo enfrenta uma <strong>crise climática urgente e sem precedentes</strong>.
+                    A queima de combustíveis fósseis representa mais de <em>75% das emissões globais</em>
+                    de gases de efeito estufa, contribuindo diretamente para o aquecimento global e
+                    alterações climáticas severas.
+                </p>
+                <p>
+                    No Brasil, já possuímos uma das matrizes energéticas mais <u>limpas e renováveis</u>
+                    do mundo — mais de <mark>83% da nossa energia elétrica</mark> provém de fontes
+                    renováveis. Mas ainda há muito espaço para crescer e reduzir nossa dependência
+                    de petróleo e gás natural.
+                </p>
+
+                <h3>Principais Benefícios das Energias Renováveis</h3>
+                <ul class="lista-beneficios">
+                    <li>🌍 Redução drástica das emissões de CO₂ e gases de efeito estufa</li>
+                    <li>⚡ Diversificação e segurança da matriz energética nacional</li>
+                    <li>💼 Geração de empregos verdes e desenvolvimento econômico sustentável</li>
+                    <li>🏙️ Melhoria da qualidade do ar nas cidades e redução de doenças respiratórias</li>
+                    <li>💡 Acesso à energia para comunidades remotas e isoladas</li>
+                    <li>🔋 Redução progressiva dos custos de geração e armazenamento de energia</li>
+                </ul>
+
+                <div class="cards-grid">
+                    <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
+                        <div class="card-icon">☀️</div>
+                        <h3>Solar Fotovoltaica</h3>
+                        <p>O Brasil possui uma das maiores incidências solares do mundo. A energia solar fotovoltaica cresce 50% ao ano no país.</p>
+                    </div>
+                    <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
+                        <div class="card-icon">💨</div>
+                        <h3>Energia Eólica</h3>
+                        <p>O Nordeste brasileiro tem um dos melhores ventos do planeta, tornando o Brasil líder em geração eólica na América Latina.</p>
+                    </div>
+                    <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
+                        <div class="card-icon">💧</div>
+                        <h3>Energia Hidrelétrica</h3>
+                        <p>As usinas hidrelétricas respondem por mais de 60% da geração elétrica brasileira, aproveitando a riqueza hídrica do país.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela Comparativa -->
+        <section class="section section-alt" id="comparativo">
+            <div class="container">
+                <h2>Comparativo das Fontes de Energia</h2>
+                <p>A tabela abaixo compara as principais características das fontes de energia utilizadas no Brasil e no mundo:</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fonte de Energia</th>
+                                <th>Classificação</th>
+                                <th>Impacto no CO₂</th>
+                                <th>Custo Médio (R$/MWh)</th>
+                                <th>Potencial no Brasil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-renovavel">
+                                <td>Solar Fotovoltaica</td>
+                                <td><span class="badge badge-green">Renovável</span></td>
+                                <td>Muito Baixo</td>
+                                <td>~R$ 180</td>
+                                <td>Muito Alto ⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr class="row-renovavel">
+                                <td>Energia Eólica</td>
+                                <td><span class="badge badge-green">Renovável</span></td>
+                                <td>Baixo</td>
+                                <td>~R$ 130</td>
+                                <td>Alto ⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr class="row-renovavel">
+                                <td>Hidrelétrica</td>
+                                <td><span class="badge badge-green">Renovável</span></td>
+                                <td>Baixo / Moderado</td>
+                                <td>~R$ 100</td>
+                                <td>Muito Alto ⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr class="row-renovavel">
+                                <td>Biomassa</td>
+                                <td><span class="badge badge-green">Renovável</span></td>
+                                <td>Neutro</td>
+                                <td>~R$ 200</td>
+                                <td>Alto ⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr class="row-nao-renovavel">
+                                <td>Gás Natural</td>
+                                <td><span class="badge badge-orange">Não Renovável</span></td>
+                                <td>Alto</td>
+                                <td>~R$ 280</td>
+                                <td>Médio ⭐⭐⭐</td>
+                            </tr>
+                            <tr class="row-nao-renovavel">
+                                <td>Petróleo / Óleo</td>
+                                <td><span class="badge badge-red">Não Renovável</span></td>
+                                <td>Muito Alto</td>
+                                <td>~R$ 350</td>
+                                <td>Baixo ⭐</td>
+                            </tr>
+                            <tr class="row-nao-renovavel">
+                                <td>Carvão Mineral</td>
+                                <td><span class="badge badge-red">Não Renovável</span></td>
+                                <td>Extremamente Alto</td>
+                                <td>~R$ 250</td>
+                                <td>Muito Baixo ⭐</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-note"><em>* Custos aproximados e ilustrativos baseados em dados de 2024–2025. Fontes: ANEEL, IRENA, EPE.</em></p>
+            </div>
+        </section>
+
+        <!-- Vídeo -->
+        <section class="section" id="video">
+            <div class="container">
+                <h2>Assista e Aprenda</h2>
+                <p>Confira o vídeo abaixo para entender melhor o papel das energias renováveis na transição energética brasileira:</p>
+
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+                        title="Energias Renováveis no Brasil"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="video-caption"><em>Fonte: YouTube</em></p>
+            </div>
+        </section>
+
+        <!-- FAQ — Accordion (onclick) -->
+        <section class="section section-alt" id="faq">
+            <div class="container">
+                <h2>Perguntas Frequentes</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-btn" onclick="toggleAcordeon(this)">
+                            <span>O que são energias renováveis?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Energias renováveis são aquelas obtidas de fontes naturais que se regeneram em escala de tempo humana, como luz solar, vento, chuva, marés e calor geotérmico. Ao contrário dos combustíveis fósseis, essas fontes não se esgotam com o uso continuado.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" onclick="toggleAcordeon(this)">
+                            <span>Qual é a situação do Brasil em energias renováveis?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>O Brasil é um dos líderes mundiais em energia renovável. Mais de 83% da geração elétrica nacional provém de fontes renováveis, principalmente hidrelétricas, eólica e solar. O país tem enorme potencial ainda a explorar, especialmente em energia solar e eólica offshore.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" onclick="toggleAcordeon(this)">
+                            <span>Como as energias renováveis combatem as mudanças climáticas?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Ao substituir combustíveis fósseis, as energias renováveis eliminam ou reduzem drasticamente as emissões de CO₂ e outros gases de efeito estufa. A descarbonização do setor energético é considerada a principal alavanca para limitar o aquecimento global a 1,5 °C, conforme o Acordo de Paris.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" onclick="toggleAcordeon(this)">
+                            <span>Qualquer pessoa pode instalar energia solar em casa?</span>
+                            <span class="accordion-icon">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Sim! Com a Lei 14.300/2022 (Marco Legal da Microgeração Distribuída), qualquer cidadão, empresa ou condomínio pode instalar painéis solares e injetar o excedente na rede elétrica, reduzindo a conta de energia. O investimento geralmente se paga em 5 a 7 anos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌱</span>
+                    <strong>EcoFuturo</strong>
+                    <p>Trabalho APS 2026/1 — Ciência da Computação — UNIP</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Início</a>
+                    <a href="content.html">O Tema</a>
+                    <a href="contact.html">Contato</a>
+                    <a href="about.html">Sobre o Grupo</a>
+                </nav>
+            </div>
+            <p class="footer-copy">&copy; 2026 EcoFuturo — Atividades Práticas Supervisionadas — UNIP</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

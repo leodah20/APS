@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — EcoFuturo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <div id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span>EcoFuturo</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="content.html" class="nav-link">O Tema</a>
+                <a href="contact.html" class="nav-link active">Contato</a>
+                <a href="about.html" class="nav-link">Sobre o Grupo</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="page-header">
+        <h1>Fale Conosco</h1>
+        <p>Tem dúvidas, sugestões ou quer saber mais sobre energias renováveis? Preencha o formulário abaixo.</p>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="form-page-wrapper">
+                    <div class="form-container">
+                        <h2>Formulário de Contato</h2>
+                        <p class="required-note">Campos marcados com <span class="field-required">*</span> são obrigatórios.</p>
+
+                        <form id="form-contato" onsubmit="validarFormulario(event)">
+
+                            <div class="form-group">
+                                <label for="nome">Nome Completo <span class="field-required">*</span></label>
+                                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" maxlength="120" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="data_nascimento">Data de Nascimento <span class="field-required">*</span></label>
+                                <input type="date" id="data_nascimento" name="data_nascimento" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefone">Telefone / WhatsApp</label>
+                                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail <span class="field-required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sexo <span class="field-required">*</span></label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="sexo" value="masculino" required>
+                                        Masculino
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="sexo" value="feminino">
+                                        Feminino
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="sexo" value="outro">
+                                        Prefiro não informar
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="escolaridade">Escolaridade <span class="field-required">*</span></label>
+                                <select id="escolaridade" name="escolaridade" required>
+                                    <option value="" disabled selected>Selecione seu nível de escolaridade</option>
+                                    <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
+                                    <option value="fundamental_completo">Ensino Fundamental Completo</option>
+                                    <option value="medio_incompleto">Ensino Médio Incompleto</option>
+                                    <option value="medio_completo">Ensino Médio Completo</option>
+                                    <option value="superior_incompleto">Ensino Superior Incompleto</option>
+                                    <option value="superior_completo">Ensino Superior Completo</option>
+                                    <option value="pos_graduacao">Pós-Graduação / Mestrado / Doutorado</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="assunto">Assunto</label>
+                                <input type="text" id="assunto" name="assunto" placeholder="Ex.: Dúvida sobre energia solar">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensagem">Mensagem <span class="field-required">*</span></label>
+                                <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem, dúvida ou sugestão aqui..." required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="termos" name="termos">
+                                        Li e aceito os termos de uso e a política de privacidade deste site. <span class="field-required">*</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-submit">Enviar Mensagem ✉️</button>
+
+                        </form>
+
+                        <div id="form-success" class="form-success">
+                            ✅ Mensagem enviada com sucesso! Obrigado pelo contato. Retornaremos em breve.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌱</span>
+                    <strong>EcoFuturo</strong>
+                    <p>Trabalho APS 2026/1 — Ciência da Computação — UNIP</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Início</a>
+                    <a href="content.html">O Tema</a>
+                    <a href="contact.html">Contato</a>
+                    <a href="about.html">Sobre o Grupo</a>
+                </nav>
+            </div>
+            <p class="footer-copy">&copy; 2026 EcoFuturo — Atividades Práticas Supervisionadas — UNIP</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
