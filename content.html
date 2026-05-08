@@ -18,7 +18,7 @@
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Início</a>
                 <a href="content.html" class="nav-link active">O Tema</a>
-                <a href="calculadora.html" class="nav-link">Calculadora</a>
+                <a href="calculadora.html" class="nav-link">Ferramentas</a>
                 <a href="contact.html" class="nav-link">Contato</a>
                 <a href="about.html" class="nav-link">Sobre o Grupo</a>
             </div>
@@ -228,6 +228,18 @@
             </div>
         </section>
 
+        <!-- Gráfico Interativo -->
+        <section class="section section-alt" id="grafico">
+            <div class="container">
+                <h2>📊 Evolução da Matriz Elétrica Brasileira</h2>
+                <p>Veja como solar e eólica cresceram expressivamente na geração elétrica do Brasil entre 2015 e 2024, enquanto a dependência de fontes não renováveis caiu:</p>
+                <div class="chart-wrapper">
+                    <canvas id="graficoMatriz"></canvas>
+                </div>
+                <p class="table-note"><em>* Dados aproximados baseados em relatórios da ANEEL, EPE e ONS. Solar inclui micro e minigeração distribuída.</em></p>
+            </div>
+        </section>
+
     </main>
 
     <div id="toast" class="toast"></div>
@@ -243,6 +255,7 @@
                 <nav class="footer-nav">
                     <a href="index.html">Início</a>
                     <a href="content.html">O Tema</a>
+                    <a href="calculadora.html">Ferramentas</a>
                     <a href="contact.html">Contato</a>
                     <a href="about.html">Sobre o Grupo</a>
                 </nav>
@@ -251,6 +264,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

@@ -1,3 +1,215 @@
+// ===== ABAS =====
+function abrirTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    if (id === 'quiz') {
+        var c = document.getElementById('quiz-container');
+        if (c && c.innerHTML === '') iniciarQuiz();
+    }
+}
+
+// ===== SIMULADOR SOLAR =====
+var irradiacao = {
+    AC:5.0, AL:5.5, AM:5.2, AP:5.3, BA:5.7, CE:6.0, DF:5.7, ES:5.4,
+    GO:5.6, MA:5.6, MG:5.6, MS:5.4, MT:5.5, PA:5.4, PB:5.8, PE:5.6,
+    PI:6.0, PR:4.8, RJ:5.2, RN:6.0, RO:5.1, RR:5.5, RS:4.7, SC:4.7,
+    SE:5.4, SP:5.0, TO:5.7
+};
+
+function calcularSolar(event) {
+    event.preventDefault();
+    var estado = document.getElementById('estado').value;
+    var conta = parseFloat(document.getElementById('conta-solar').value);
+    var imovelEl = document.querySelector('input[name="imovel"]:checked');
+
+    if (!imovelEl) { alert('Selecione o tipo de imóvel.'); return; }
+    var imovel = imovelEl.value;
+
+    var resultadoDiv = document.getElementById('resultado-solar');
+
+    if (imovel === 'alugado') {
+        resultadoDiv.innerHTML = '<div class="co2-resultado"><div class="co2-comparacao" style="border-left:4px solid var(--amarelo)">' +
+            '<h3>🏢 Imóvel alugado — alternativas disponíveis!</h3>' +
+            '<p>Quem não tem telhado próprio ainda pode aproveitar energia solar por meio das <strong>Cooperativas de Energia Solar</strong> ou <strong>Microgeração Compartilhada</strong>, regulamentadas pela Lei 14.300/2022.</p>' +
+            '<ul style="padding-left:1.25rem;margin-top:0.75rem">' +
+            '<li>Você assina uma cota de geração em uma usina solar compartilhada</li>' +
+            '<li>Os créditos são abatidos diretamente na sua conta de luz</li>' +
+            '<li>Sem necessidade de instalação ou manutenção</li>' +
+            '<li>Econômico a partir da primeira fatura</li>' +
+            '</ul>' +
+            '<p style="margin-top:1rem">Procure cooperativas de energia solar na sua região — é uma solução real e acessível!</p>' +
+            '</div>' +
+            '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente 🔄</button>' +
+            '</div>';
+        resultadoDiv.style.display = 'block';
+        document.getElementById('form-solar').style.display = 'none';
+        resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+
+    var irr = irradiacao[estado];
+    var precoKwh = 0.85;
+    var consumoMensal = conta / precoKwh;
+    var gerMensalPorKwp = irr * 30 * 0.75;
+    var kwpNecessario = consumoMensal / gerMensalPorKwp;
+    var paineis = Math.ceil(kwpNecessario / 0.55);
+    var kwpReal = paineis * 0.55;
+    var custoInstalacao = Math.round(kwpReal * 4800);
+    var economiasMensal = conta * 0.88;
+    var economiasAnual = economiasMensal * 12;
+    var payback = (custoInstalacao / economiasAnual).toFixed(1);
+    var economia25anos = Math.round(economiasAnual * 25 - custoInstalacao);
+    var co2Mensal = (consumoMensal * 0.08).toFixed(1);
+    var co2Anual = (consumoMensal * 0.08 * 12 / 1000).toFixed(2);
+    var viavel = parseFloat(payback) <= 8;
+
+    var html = '<div class="co2-resultado">' +
+        '<h3>Resultado da Simulação — ' + estado + '</h3>' +
+        '<div class="solar-cards">' +
+            '<div class="solar-card"><span class="solar-icon">☀️</span><span class="solar-val">' + paineis + '</span><span class="solar-label">painéis (550 W)</span></div>' +
+            '<div class="solar-card"><span class="solar-icon">⚡</span><span class="solar-val">' + kwpReal.toFixed(2) + ' kWp</span><span class="solar-label">potência do sistema</span></div>' +
+            '<div class="solar-card"><span class="solar-icon">💰</span><span class="solar-val">R$ ' + custoInstalacao.toLocaleString('pt-BR') + '</span><span class="solar-label">investimento estimado</span></div>' +
+            '<div class="solar-card"><span class="solar-icon">📉</span><span class="solar-val">R$ ' + Math.round(economiasMensal) + '/mês</span><span class="solar-label">economia na conta</span></div>' +
+            '<div class="solar-card"><span class="solar-icon">⏱️</span><span class="solar-val">' + payback + ' anos</span><span class="solar-label">retorno do investimento</span></div>' +
+            '<div class="solar-card"><span class="solar-icon">🌱</span><span class="solar-val">' + co2Anual + ' t</span><span class="solar-label">CO₂ evitado/ano</span></div>' +
+        '</div>' +
+        '<div class="co2-comparacao" style="border-left:4px solid ' + (viavel ? 'var(--verde)' : 'var(--amarelo)') + '">' +
+            '<p>' + (viavel
+                ? '✅ <strong>Energia solar é altamente viável para você!</strong> Com retorno em ' + payback + ' anos e economia de R$ ' + economia25anos.toLocaleString('pt-BR') + ' ao longo de 25 anos, o investimento se paga com folga.'
+                : '⚠️ A viabilidade depende de condições específicas. Consulte um instalador certificado para uma análise personalizada do seu telhado.') +
+            '</p>' +
+            '<p>☀️ Irradiação solar no seu estado: <strong>' + irr + ' kWh/m²/dia</strong></p>' +
+        '</div>' +
+        '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente 🔄</button>' +
+        '</div>';
+
+    resultadoDiv.innerHTML = html;
+    resultadoDiv.style.display = 'block';
+    document.getElementById('form-solar').style.display = 'none';
+    resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===== QUIZ =====
+var quizPerguntas = [
+    {
+        p: 'Qual percentual da eletricidade brasileira vem de fontes renováveis?',
+        o: ['83%', '45%', '60%', '92%'], c: 0,
+        e: 'O Brasil gera mais de 83% de sua eletricidade de fontes renováveis — principalmente hidrelétricas, eólica e solar.'
+    },
+    {
+        p: 'Qual estado brasileiro tem a maior capacidade de energia eólica instalada?',
+        o: ['Bahia', 'Ceará', 'Rio Grande do Norte', 'Piauí'], c: 2,
+        e: 'O Rio Grande do Norte lidera o ranking nacional de energia eólica, aproveitando os ventos constantes e intensos do Nordeste.'
+    },
+    {
+        p: 'Em que ano foi sancionado o Marco Legal da Microgeração Distribuída no Brasil?',
+        o: ['2015', '2019', '2022', '2024'], c: 2,
+        e: 'A Lei 14.300/2022 regulamentou a micro e minigeração distribuída, facilitando a instalação de painéis solares residenciais.'
+    },
+    {
+        p: 'Quanto o custo dos painéis solares caiu desde 2012?',
+        o: ['Mais de 90%', 'Cerca de 50%', 'Cerca de 70%', 'Cerca de 30%'], c: 0,
+        e: 'Os painéis solares ficaram mais de 90% mais baratos desde 2012, tornando-se a fonte de energia mais barata da história em várias regiões.'
+    },
+    {
+        p: 'Qual é a principal fonte de eletricidade do Brasil?',
+        o: ['Energia Solar', 'Energia Eólica', 'Energia Hidrelétrica', 'Gás Natural'], c: 2,
+        e: 'A energia hidrelétrica representa cerca de 54-60% da geração elétrica brasileira, aproveitando a enorme riqueza hídrica do país.'
+    }
+];
+
+var quizIndex = 0;
+var quizPontos = 0;
+var quizRespondeu = false;
+
+function iniciarQuiz() {
+    quizIndex = 0;
+    quizPontos = 0;
+    renderizarPergunta();
+}
+
+function renderizarPergunta() {
+    var q = quizPerguntas[quizIndex];
+    var progresso = Math.round((quizIndex / quizPerguntas.length) * 100);
+    var html = '<div class="quiz-progresso-bg"><div class="quiz-progresso-bar" style="width:' + progresso + '%"></div></div>' +
+        '<p class="quiz-contador">Pergunta ' + (quizIndex + 1) + ' de ' + quizPerguntas.length + ' &nbsp;|&nbsp; ✅ ' + quizPontos + ' corretas</p>' +
+        '<h3 class="quiz-pergunta">' + q.p + '</h3>' +
+        '<div class="quiz-opcoes">';
+    q.o.forEach(function(op, i) {
+        html += '<button class="quiz-opcao" onclick="responderQuiz(' + i + ')">' + op + '</button>';
+    });
+    html += '</div><div id="quiz-feedback" style="display:none"></div>';
+    document.getElementById('quiz-container').innerHTML = html;
+    quizRespondeu = false;
+}
+
+function responderQuiz(idx) {
+    if (quizRespondeu) return;
+    quizRespondeu = true;
+    var q = quizPerguntas[quizIndex];
+    document.querySelectorAll('.quiz-opcao').forEach(function(btn, i) {
+        btn.disabled = true;
+        if (i === q.c) btn.classList.add('correta');
+        else if (i === idx) btn.classList.add('errada');
+    });
+    if (idx === q.c) quizPontos++;
+    var acertou = (idx === q.c);
+    var fb = document.getElementById('quiz-feedback');
+    fb.className = 'quiz-feedback ' + (acertou ? 'feedback-ok' : 'feedback-erro');
+    var proximaLabel = (quizIndex < quizPerguntas.length - 1) ? 'Próxima →' : 'Ver resultado 🏆';
+    var proximaFn = (quizIndex < quizPerguntas.length - 1) ? 'proximaPergunta()' : 'finalizarQuiz()';
+    fb.innerHTML = (acertou ? '✅ Correto! ' : '❌ Errado. ') + q.e +
+        '<br><button class="btn-submit" style="margin-top:0.75rem;width:auto;padding:0.5rem 1.5rem" onclick="' + proximaFn + '">' + proximaLabel + '</button>';
+    fb.style.display = 'block';
+}
+
+function proximaPergunta() { quizIndex++; renderizarPergunta(); }
+
+function finalizarQuiz() {
+    var pct = Math.round((quizPontos / quizPerguntas.length) * 100);
+    var msg, emoji;
+    if (pct === 100) { msg = 'Perfeito! Você é um expert em energias renováveis!'; emoji = '🏆'; }
+    else if (pct >= 60) { msg = 'Muito bem! Você tem bom conhecimento sobre o tema.'; emoji = '🌟'; }
+    else { msg = 'Continue estudando! Explore o conteúdo do site para aprender mais.'; emoji = '📚'; }
+    document.getElementById('quiz-container').innerHTML =
+        '<div class="quiz-resultado">' +
+        '<div class="quiz-score">' + emoji +
+        '<span class="quiz-pontos">' + quizPontos + '/' + quizPerguntas.length + '</span>' +
+        '<span class="quiz-pct">' + pct + '% de acerto</span></div>' +
+        '<p>' + msg + '</p>' +
+        '<div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">' +
+        '<button class="btn-submit" style="width:auto;padding:0.6rem 1.5rem" onclick="iniciarQuiz()">Jogar novamente 🔄</button>' +
+        '<a href="content.html" class="btn-submit" style="width:auto;padding:0.6rem 1.5rem;text-decoration:none">Estudar mais 📖</a>' +
+        '</div></div>';
+}
+
+// ===== GRÁFICO — Matriz Elétrica Brasileira =====
+window.addEventListener('load', function() {
+    var canvas = document.getElementById('graficoMatriz');
+    if (canvas && typeof Chart !== 'undefined') {
+        new Chart(canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+                datasets: [
+                    { label: '💧 Hídrica (%)', data: [68,65,66,66,65,66,56,61,58,54], borderColor:'#1565C0', backgroundColor:'rgba(21,101,192,0.1)', tension:0.4, fill:true },
+                    { label: '💨 Eólica (%)',  data: [5,6,8,9,9,10,12,13,14,15],      borderColor:'#2e9955', backgroundColor:'rgba(46,153,85,0.1)',  tension:0.4, fill:true },
+                    { label: '☀️ Solar (%)',   data: [0.1,0.2,0.5,1,1.5,2,3,5,8,12], borderColor:'#f9a825', backgroundColor:'rgba(249,168,37,0.1)', tension:0.4, fill:true }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { title: { display: true, text: '% da geração elétrica' }, min: 0, max: 80 }
+                }
+            }
+        });
+    }
+});
+
 // ===== CALCULADORA DE PEGADA DE CARBONO =====
 
 var emissaoTransporte = {

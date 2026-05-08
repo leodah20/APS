@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de CO₂ — EcoFuturo</title>
+    <title>Ferramentas — EcoFuturo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Início</a>
                 <a href="content.html" class="nav-link">O Tema</a>
-                <a href="calculadora.html" class="nav-link active">Calculadora</a>
+                <a href="calculadora.html" class="nav-link active">Ferramentas</a>
                 <a href="contact.html" class="nav-link">Contato</a>
                 <a href="about.html" class="nav-link">Sobre o Grupo</a>
             </div>
@@ -25,81 +25,162 @@
     </div>
 
     <header class="page-header">
-        <h1>🌍 Calculadora de Pegada de Carbono</h1>
-        <p>Descubra quanto CO₂ você emite por ano e veja como reduzir seu impacto no meio ambiente.</p>
+        <h1>🛠️ Ferramentas Interativas</h1>
+        <p>Calcule sua pegada de carbono, simule energia solar e teste seus conhecimentos.</p>
     </header>
 
     <main>
         <section class="section">
             <div class="container">
-                <div class="form-page-wrapper">
-                    <div class="form-container">
 
-                        <form id="form-co2" onsubmit="calcularCO2(event)">
-                            <h2>Seus Hábitos</h2>
-                            <p>Responda as perguntas abaixo para calcular sua pegada de carbono estimada anual.</p>
+                <div class="tab-nav">
+                    <button class="tab-btn active" onclick="abrirTab('co2', this)">🌍 Pegada de CO₂</button>
+                    <button class="tab-btn" onclick="abrirTab('solar', this)">☀️ Simulador Solar</button>
+                    <button class="tab-btn" onclick="abrirTab('quiz', this)">🧠 Quiz</button>
+                </div>
 
-                            <div class="form-group">
-                                <label for="transporte">🚗 Meio de transporte principal</label>
-                                <select id="transporte" name="transporte" onchange="toggleDistancia(this)" required>
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="gasolina">Carro a gasolina / diesel</option>
-                                    <option value="flex">Carro flex (usa etanol)</option>
-                                    <option value="moto">Motocicleta</option>
-                                    <option value="publico">Transporte público (ônibus / metrô)</option>
-                                    <option value="bicicleta">Bicicleta / a pé</option>
-                                </select>
-                            </div>
+                <!-- ===== ABA CO2 ===== -->
+                <div id="tab-co2" class="tab-panel active">
+                    <div class="form-page-wrapper">
+                        <div class="form-container">
+                            <form id="form-co2" onsubmit="calcularCO2(event)">
+                                <h2>Calculadora de Pegada de Carbono</h2>
+                                <p>Descubra quanto CO₂ você emite por ano e veja como reduzir seu impacto.</p>
 
-                            <div class="form-group" id="grupo-distancia">
-                                <label>📏 Distância percorrida por dia</label>
-                                <div class="radio-group">
-                                    <label class="radio-label"><input type="radio" name="distancia" value="menos10"> Menos de 10 km</label>
-                                    <label class="radio-label"><input type="radio" name="distancia" value="10a30"> 10 a 30 km</label>
-                                    <label class="radio-label"><input type="radio" name="distancia" value="30a60"> 30 a 60 km</label>
-                                    <label class="radio-label"><input type="radio" name="distancia" value="mais60"> Mais de 60 km</label>
+                                <div class="form-group">
+                                    <label for="transporte">🚗 Meio de transporte principal</label>
+                                    <select id="transporte" name="transporte" onchange="toggleDistancia(this)" required>
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="gasolina">Carro a gasolina / diesel</option>
+                                        <option value="flex">Carro flex (usa etanol)</option>
+                                        <option value="moto">Motocicleta</option>
+                                        <option value="publico">Transporte público (ônibus / metrô)</option>
+                                        <option value="bicicleta">Bicicleta / a pé</option>
+                                    </select>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="energia">⚡ Valor médio da sua conta de luz por mês</label>
-                                <select id="energia" name="energia" required>
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="menos100">Menos de R$ 100</option>
-                                    <option value="100a200">R$ 100 a R$ 200</option>
-                                    <option value="200a400">R$ 200 a R$ 400</option>
-                                    <option value="mais400">Mais de R$ 400</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>🥩 Alimentação</label>
-                                <div class="radio-group">
-                                    <label class="radio-label"><input type="radio" name="dieta" value="carne_diaria" required> Como carne vermelha quase todo dia</label>
-                                    <label class="radio-label"><input type="radio" name="dieta" value="carne_semanal"> Como carne algumas vezes por semana</label>
-                                    <label class="radio-label"><input type="radio" name="dieta" value="vegetariano"> Sou principalmente vegetariano</label>
-                                    <label class="radio-label"><input type="radio" name="dieta" value="vegano"> Sou vegano</label>
+                                <div class="form-group" id="grupo-distancia">
+                                    <label>📏 Distância percorrida por dia</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label"><input type="radio" name="distancia" value="menos10"> Menos de 10 km</label>
+                                        <label class="radio-label"><input type="radio" name="distancia" value="10a30"> 10 a 30 km</label>
+                                        <label class="radio-label"><input type="radio" name="distancia" value="30a60"> 30 a 60 km</label>
+                                        <label class="radio-label"><input type="radio" name="distancia" value="mais60"> Mais de 60 km</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="viagem">✈️ Viagens aéreas por ano</label>
-                                <select id="viagem" name="viagem" required>
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="nenhum">Não viajo de avião</option>
-                                    <option value="domestico">1 a 2 voos domésticos</option>
-                                    <option value="internacional">3+ domésticos ou 1 internacional</option>
-                                    <option value="multiplos">Voos internacionais frequentes</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <label for="energia">⚡ Valor médio da sua conta de luz por mês</label>
+                                    <select id="energia" name="energia" required>
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="menos100">Menos de R$ 100</option>
+                                        <option value="100a200">R$ 100 a R$ 200</option>
+                                        <option value="200a400">R$ 200 a R$ 400</option>
+                                        <option value="mais400">Mais de R$ 400</option>
+                                    </select>
+                                </div>
 
-                            <button type="submit" class="btn-submit">Calcular minha pegada 🌍</button>
-                        </form>
+                                <div class="form-group">
+                                    <label>🥩 Alimentação</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label"><input type="radio" name="dieta" value="carne_diaria" required> Como carne vermelha quase todo dia</label>
+                                        <label class="radio-label"><input type="radio" name="dieta" value="carne_semanal"> Como carne algumas vezes por semana</label>
+                                        <label class="radio-label"><input type="radio" name="dieta" value="vegetariano"> Sou principalmente vegetariano</label>
+                                        <label class="radio-label"><input type="radio" name="dieta" value="vegano"> Sou vegano</label>
+                                    </div>
+                                </div>
 
-                        <div id="resultado-co2" style="display:none;"></div>
+                                <div class="form-group">
+                                    <label for="viagem">✈️ Viagens aéreas por ano</label>
+                                    <select id="viagem" name="viagem" required>
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="nenhum">Não viajo de avião</option>
+                                        <option value="domestico">1 a 2 voos domésticos</option>
+                                        <option value="internacional">3+ domésticos ou 1 internacional</option>
+                                        <option value="multiplos">Voos internacionais frequentes</option>
+                                    </select>
+                                </div>
 
+                                <button type="submit" class="btn-submit">Calcular minha pegada 🌍</button>
+                            </form>
+                            <div id="resultado-co2" style="display:none;"></div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- ===== ABA SOLAR ===== -->
+                <div id="tab-solar" class="tab-panel">
+                    <div class="form-page-wrapper">
+                        <div class="form-container">
+                            <form id="form-solar" onsubmit="calcularSolar(event)">
+                                <h2>Simulador de Viabilidade Solar</h2>
+                                <p>Descubra se vale a pena instalar energia solar na sua residência com dados reais do mercado brasileiro.</p>
+
+                                <div class="form-group">
+                                    <label for="estado">📍 Seu estado</label>
+                                    <select id="estado" required>
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="AC">Acre (AC)</option>
+                                        <option value="AL">Alagoas (AL)</option>
+                                        <option value="AM">Amazonas (AM)</option>
+                                        <option value="AP">Amapá (AP)</option>
+                                        <option value="BA">Bahia (BA)</option>
+                                        <option value="CE">Ceará (CE)</option>
+                                        <option value="DF">Distrito Federal (DF)</option>
+                                        <option value="ES">Espírito Santo (ES)</option>
+                                        <option value="GO">Goiás (GO)</option>
+                                        <option value="MA">Maranhão (MA)</option>
+                                        <option value="MG">Minas Gerais (MG)</option>
+                                        <option value="MS">Mato Grosso do Sul (MS)</option>
+                                        <option value="MT">Mato Grosso (MT)</option>
+                                        <option value="PA">Pará (PA)</option>
+                                        <option value="PB">Paraíba (PB)</option>
+                                        <option value="PE">Pernambuco (PE)</option>
+                                        <option value="PI">Piauí (PI)</option>
+                                        <option value="PR">Paraná (PR)</option>
+                                        <option value="RJ">Rio de Janeiro (RJ)</option>
+                                        <option value="RN">Rio Grande do Norte (RN)</option>
+                                        <option value="RO">Rondônia (RO)</option>
+                                        <option value="RR">Roraima (RR)</option>
+                                        <option value="RS">Rio Grande do Sul (RS)</option>
+                                        <option value="SC">Santa Catarina (SC)</option>
+                                        <option value="SE">Sergipe (SE)</option>
+                                        <option value="SP">São Paulo (SP)</option>
+                                        <option value="TO">Tocantins (TO)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="conta-solar">💰 Valor médio da sua conta de luz (R$)</label>
+                                    <input type="number" id="conta-solar" min="50" max="99999" placeholder="Ex: 350" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>🏠 Tipo de imóvel</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label"><input type="radio" name="imovel" value="proprio" required> Próprio — posso instalar painéis</label>
+                                        <label class="radio-label"><input type="radio" name="imovel" value="alugado"> Alugado / Não tenho telhado disponível</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn-submit">Simular agora ☀️</button>
+                            </form>
+                            <div id="resultado-solar" style="display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ABA QUIZ ===== -->
+                <div id="tab-quiz" class="tab-panel">
+                    <div class="form-page-wrapper">
+                        <div class="form-container">
+                            <h2>Quiz: Energias Renováveis</h2>
+                            <p>Teste seus conhecimentos sobre energias renováveis no Brasil. São 5 perguntas com feedback imediato.</p>
+                            <div id="quiz-container"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
@@ -117,7 +198,7 @@
                 <nav class="footer-nav">
                     <a href="index.html">Início</a>
                     <a href="content.html">O Tema</a>
-                    <a href="calculadora.html">Calculadora</a>
+                    <a href="calculadora.html">Ferramentas</a>
                     <a href="contact.html">Contato</a>
                     <a href="about.html">Sobre o Grupo</a>
                 </nav>
