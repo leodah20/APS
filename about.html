@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<!--
+    about.html — Página "Sobre o Grupo" do EcoFuturo
+    Exigências atendidas nesta página:
+      - Foto do integrante (img/foto.jpg) com fallback via onerror
+      - Breve texto descritivo sobre o aluno
+      - Tags semânticas: <strong>, <em>, <u>, <mark>
+      - Tabela de informações do trabalho em lista estruturada
+    Disciplina: Programação Web Responsiva (PWR) — APS 2026/1 — UNIP
+    Aluno: Leonardo Cordeiro Sutil — RA: N0368J0
+-->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +18,9 @@
 </head>
 <body>
 
-    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <!-- =====================================================================
+         MENU DE NAVEGAÇÃO — .active em "Sobre o Grupo" nesta página
+         ===================================================================== -->
     <div id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
@@ -34,6 +46,7 @@
         <section class="section">
             <div class="container">
 
+                <!-- Texto introdutório com tags semânticas de formatação de texto -->
                 <div class="about-intro">
                     <h2>Sobre o Grupo</h2>
                     <p>
@@ -48,9 +61,16 @@
                     </p>
                 </div>
 
+                <!-- =============================================================
+                     FOTO DO INTEGRANTE
+                     onerror="..." é um handler JavaScript inline que oculta a
+                     imagem e exibe o placeholder caso img/foto.jpg não exista.
+                     Isso garante que a página não quebre se a imagem for removida.
+                     ============================================================= -->
                 <div class="group-photo-container">
                     <img src="img/foto.jpg" alt="Foto do integrante" class="group-photo"
                          onerror="this.style.display='none'; document.getElementById('foto-placeholder').style.display='flex';">
+                    <!-- Placeholder exibido apenas se a foto falhar ao carregar -->
                     <div id="foto-placeholder" class="photo-placeholder" style="display:none;">
                         <span>📸</span>
                         <p>Adicione sua foto em <strong>img/foto.jpg</strong></p>
@@ -59,8 +79,10 @@
 
                 <h2>Integrante</h2>
 
+                <!-- Card do membro com avatar CSS (iniciais em círculo, sem dependência de imagem) -->
                 <div class="members-grid">
                     <div class="member-card">
+                        <!-- Avatar gerado por CSS: círculo verde com iniciais "LC" -->
                         <div class="member-avatar">LC</div>
                         <h3>Leonardo Cordeiro Sutil</h3>
                         <p class="member-ra">RA: N0368J0</p>
@@ -72,8 +94,14 @@
                     </div>
                 </div>
 
+                <!-- =============================================================
+                     INFORMAÇÕES DO TRABALHO
+                     Estrutura de lista <ul> com pares chave-valor em <strong> + <span>.
+                     border-left: 3px solid var(--verde) no CSS identifica visualmente
+                     este bloco como informação institucional.
+                     ============================================================= -->
                 <div class="course-info">
-                    <h3>📋 Informações do Trabalho</h3>
+                    <h3>Informações do Trabalho</h3>
                     <ul>
                         <li>
                             <strong>Curso:</strong>
@@ -97,7 +125,7 @@
                         </li>
                         <li>
                             <strong>Tecnologias:</strong>
-                            <span>HTML5, CSS3 (Flexbox), JavaScript (ES6)</span>
+                            <span>HTML5, CSS3 (Flexbox / Grid), JavaScript, Chart.js, Formspree, GitHub Pages</span>
                         </li>
                         <li>
                             <strong>Apresentação:</strong>
@@ -127,7 +155,7 @@
                 <nav class="footer-nav">
                     <a href="index.html">Início</a>
                     <a href="content.html">O Tema</a>
-                    <a href="calculadora.html">Calculadora</a>
+                    <a href="calculadora.html">Ferramentas</a>
                     <a href="contact.html">Contato</a>
                     <a href="about.html">Sobre o Grupo</a>
                 </nav>

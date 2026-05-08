@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<!--
+    contact.html — Formulário de contato do EcoFuturo
+    O formulário atende TODAS as exigências da APS:
+      - Mínimo 6 campos de input: nome, data_nascimento, telefone, email, assunto, mensagem
+      - Tag <select>: escolaridade
+      - Campo radio: sexo
+      - Campo checkbox: termos
+      - Botão de submit
+    Envio real via Formspree (serviço externo gratuito) usando Fetch API assíncrona.
+    Validação client-side em scripts.js antes do envio.
+    Disciplina: Programação Web Responsiva (PWR) — APS 2026/1 — UNIP
+    Aluno: Leonardo Cordeiro Sutil — RA: N0368J0
+-->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +21,9 @@
 </head>
 <body>
 
-    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <!-- =====================================================================
+         MENU DE NAVEGAÇÃO — .active em "Contato" nesta página
+         ===================================================================== -->
     <div id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
@@ -38,31 +53,43 @@
                         <h2>Formulário de Contato</h2>
                         <p class="required-note">Campos marcados com <span class="field-required">*</span> são obrigatórios.</p>
 
+                        <!--
+                            action="https://formspree.io/f/xvzlwpea" — endpoint do serviço Formspree.
+                            O JavaScript intercepta o submit com event.preventDefault() e envia via
+                            Fetch API, sem redirecionar o usuário para a página do Formspree.
+                            method="POST" é mantido como fallback caso o JS falhe.
+                        -->
                         <form id="form-contato" action="https://formspree.io/f/xvzlwpea" method="POST" onsubmit="validarFormulario(event)">
 
+                            <!-- Campo 1: Nome — input text com maxlength e atributo required (validação nativa HTML5) -->
                             <div class="form-group">
                                 <label for="nome">Nome Completo <span class="field-required">*</span></label>
                                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" maxlength="120" required>
                             </div>
 
+                            <!-- Campo 2: Data de nascimento — input type="date" renderiza seletor nativo do SO -->
                             <div class="form-group">
                                 <label for="data_nascimento">Data de Nascimento <span class="field-required">*</span></label>
                                 <input type="date" id="data_nascimento" name="data_nascimento" required>
                             </div>
 
+                            <!-- Campo 3: Telefone — type="tel" ativa teclado numérico em dispositivos móveis -->
                             <div class="form-group">
                                 <label for="telefone">Telefone / WhatsApp</label>
                                 <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
                             </div>
 
+                            <!-- Campo 4: E-mail — type="email" valida formato nativamente no navegador -->
                             <div class="form-group">
                                 <label for="email">E-mail <span class="field-required">*</span></label>
                                 <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
                             </div>
 
+                            <!-- Campo 5: Sexo — type="radio" (campo de marcação, exigência da APS) -->
                             <div class="form-group">
                                 <label>Sexo <span class="field-required">*</span></label>
                                 <div class="radio-group">
+                                    <!-- Todos os radios compartilham name="sexo" para funcionarem como grupo exclusivo -->
                                     <label class="radio-label">
                                         <input type="radio" name="sexo" value="masculino" required>
                                         Masculino
@@ -78,8 +105,10 @@
                                 </div>
                             </div>
 
+                            <!-- Campo 6: Escolaridade — <select> com caixa de seleção (exigência da APS) -->
                             <div class="form-group">
                                 <label for="escolaridade">Escolaridade <span class="field-required">*</span></label>
+                                <!-- disabled+selected na primeira option impede envio sem seleção real -->
                                 <select id="escolaridade" name="escolaridade" required>
                                     <option value="" disabled selected>Selecione seu nível de escolaridade</option>
                                     <option value="fundamental_incompleto">Ensino Fundamental Incompleto</option>
@@ -92,16 +121,19 @@
                                 </select>
                             </div>
 
+                            <!-- Campo 7: Assunto — campo opcional para categorizar a mensagem -->
                             <div class="form-group">
                                 <label for="assunto">Assunto</label>
                                 <input type="text" id="assunto" name="assunto" placeholder="Ex.: Dúvida sobre energia solar">
                             </div>
 
+                            <!-- Campo 8: Mensagem — <textarea> permite múltiplas linhas; resize:vertical no CSS -->
                             <div class="form-group">
                                 <label for="mensagem">Mensagem <span class="field-required">*</span></label>
                                 <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem, dúvida ou sugestão aqui..." required></textarea>
                             </div>
 
+                            <!-- Campo 9: Checkbox de termos (exigência da APS: ao menos um campo de marcação) -->
                             <div class="form-group">
                                 <div class="checkbox-group">
                                     <label class="checkbox-label">
@@ -111,10 +143,12 @@
                                 </div>
                             </div>
 
+                            <!-- Botão de submit — desabilitado via JS durante o envio para evitar duplo clique -->
                             <button type="submit" class="btn-submit">Enviar Mensagem ✉️</button>
 
                         </form>
 
+                        <!-- Mensagem de sucesso — oculta por padrão, exibida via JS após envio bem-sucedido -->
                         <div id="form-success" class="form-success">
                             ✅ Mensagem enviada com sucesso! Obrigado pelo contato. Retornaremos em breve.
                         </div>
@@ -137,7 +171,7 @@
                 <nav class="footer-nav">
                     <a href="index.html">Início</a>
                     <a href="content.html">O Tema</a>
-                    <a href="calculadora.html">Calculadora</a>
+                    <a href="calculadora.html">Ferramentas</a>
                     <a href="contact.html">Contato</a>
                     <a href="about.html">Sobre o Grupo</a>
                 </nav>

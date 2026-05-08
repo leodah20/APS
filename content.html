@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<!--
+    content.html — Página de conteúdo temático: Energias Renováveis no Brasil
+    Estrutura: Navbar → Header → Contexto → Solar → Eólica → Outras → Transição → Gráfico
+    Usa CSS Grid (.energy-section) para layout imagem + texto lado a lado.
+    O gráfico requer Chart.js carregado via CDN antes de scripts.js.
+    Disciplina: Programação Web Responsiva (PWR) — APS 2026/1 — UNIP
+    Aluno: Leonardo Cordeiro Sutil — RA: N0368J0
+-->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +16,10 @@
 </head>
 <body>
 
-    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <!-- =====================================================================
+         MENU DE NAVEGAÇÃO — mesmo componente reutilizado em todas as páginas.
+         A classe .active muda para "O Tema" nesta página.
+         ===================================================================== -->
     <div id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
@@ -25,6 +36,7 @@
         </div>
     </div>
 
+    <!-- <header> com classe .page-header — banner interno das páginas secundárias -->
     <header class="page-header">
         <h1>Energias Renováveis no Brasil</h1>
         <p>Conheça as principais fontes de energia limpa, seu impacto ambiental e o potencial transformador para o futuro do planeta.</p>
@@ -32,10 +44,18 @@
 
     <main>
 
+        <!-- =================================================================
+             SEÇÃO: CONTEXTO GLOBAL
+             Layout em duas colunas via CSS Grid (.energy-section).
+             Usa todas as tags semânticas de texto exigidas pela APS:
+             <strong>, <em>, <u>, <mark>.
+             .stat-strip exibe estatísticas em grid responsivo.
+             ================================================================= -->
         <section class="section" id="contexto">
             <div class="container">
                 <h2>O Contexto Global da Crise Energética</h2>
 
+                <!-- .energy-section: grid de 2 colunas — texto à esq., imagem à dir. -->
                 <div class="energy-section">
                     <div>
                         <p>
@@ -55,11 +75,13 @@
                             crise climática global.
                         </p>
                     </div>
+                    <!-- Imagem real inserida com object-fit:cover para preencher o box sem distorção -->
                     <div class="energy-image-box">
                         <img src="img/planeta.jpg" alt="Planeta Terra" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
                     </div>
                 </div>
 
+                <!-- Faixa de estatísticas numéricas em grid responsivo -->
                 <div class="stat-strip">
                     <div class="stat-item">
                         <span class="stat-number">83%</span>
@@ -81,6 +103,12 @@
             </div>
         </section>
 
+        <!-- =================================================================
+             SEÇÃO: ENERGIA SOLAR
+             .section-alt aplica fundo alternado para separação visual entre seções.
+             Imagem à esquerda, texto à direita (ordem padrão do grid).
+             .info-box destaca dado relevante com borda lateral colorida.
+             ================================================================= -->
         <section class="section section-alt" id="solar">
             <div class="container">
                 <h2>Energia Solar Fotovoltaica</h2>
@@ -101,6 +129,7 @@
                         </p>
 
                         <h3>Vantagens da Energia Solar</h3>
+                        <!-- Lista não ordenada com marcador CSS personalizado (▸) em vez de bullet padrão -->
                         <ul class="content-list">
                             <li>Fonte inesgotável e disponível em todo o território nacional</li>
                             <li>Mínima emissão de CO₂ durante a operação</li>
@@ -111,6 +140,7 @@
                     </div>
                 </div>
 
+                <!-- Caixa de destaque informativo com borda verde à esquerda -->
                 <div class="info-box">
                     <h3>Sabia que?</h3>
                     <p>Em 2023, o Brasil atingiu a marca de <strong>35 GW de capacidade solar instalada</strong>, tornando-se o
@@ -119,10 +149,17 @@
             </div>
         </section>
 
+        <!-- =================================================================
+             SEÇÃO: ENERGIA EÓLICA
+             .energy-section.reverse usa direction:rtl no CSS para inverter
+             a ordem das colunas (imagem à direita, texto à esquerda) sem
+             alterar o HTML — técnica de layout CSS puro.
+             ================================================================= -->
         <section class="section" id="eolica">
             <div class="container">
                 <h2>Energia Eólica</h2>
 
+                <!-- Classe .reverse inverte visualmente as colunas via CSS direction:rtl -->
                 <div class="energy-section reverse">
                     <div class="energy-image-box">
                         <img src="img/eolica.jpg" alt="Energia Eólica" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
@@ -152,9 +189,13 @@
             </div>
         </section>
 
+        <!-- =================================================================
+             SEÇÃO: OUTRAS FONTES RENOVÁVEIS
+             Cards com eventos onmouseover/onmouseout (exigência: 2+ eventos JS).
+             ================================================================= -->
         <section class="section section-alt" id="outras">
             <div class="container">
-                <h2>💧 Hidrelétrica e 🌿 Biomassa</h2>
+                <h2>Hidrelétrica e Biomassa</h2>
 
                 <p>
                     Além do solar e do eólico, o Brasil conta com outras fontes renováveis consolidadas que
@@ -163,7 +204,7 @@
 
                 <div class="cards-grid">
                     <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
-                        <div class="card-icon">💧</div>
+                        <span class="card-label">Fonte renovável</span>
                         <h3>Energia Hidrelétrica</h3>
                         <p>
                             A maior fonte de energia elétrica do Brasil. Grandes usinas como Itaipu (14 GW)
@@ -172,7 +213,7 @@
                         </p>
                     </div>
                     <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
-                        <div class="card-icon">🌿</div>
+                        <span class="card-label">Fonte renovável</span>
                         <h3>Biomassa</h3>
                         <p>
                             O Brasil é o maior produtor mundial de etanol de cana-de-açúcar. A biomassa
@@ -181,7 +222,7 @@
                         </p>
                     </div>
                     <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
-                        <div class="card-icon">🌊</div>
+                        <span class="card-label">Fonte em pesquisa</span>
                         <h3>Energia de Maré e Ondas</h3>
                         <p>
                             Com mais de 7.400 km de costa, o Brasil tem enorme potencial para energia
@@ -193,6 +234,11 @@
             </div>
         </section>
 
+        <!-- =================================================================
+             SEÇÃO: TRANSIÇÃO ENERGÉTICA
+             Lista ordenada <ol> customizada com contador CSS e badge circular.
+             .info-box destaca o alinhamento ao ODS 7 da ONU.
+             ================================================================= -->
         <section class="section" id="transicao">
             <div class="container">
                 <h2>Como Acontece a Transição Energética?</h2>
@@ -201,6 +247,7 @@
                     múltiplos atores — governos, empresas e cidadãos. Veja as principais etapas:
                 </p>
 
+                <!-- Lista ordenada com numeração estilizada por CSS counter -->
                 <ol class="ordered-list">
                     <li><strong>Diagnóstico e planejamento:</strong> Mapeamento do potencial renovável disponível em cada região e definição de metas de descarbonização.</li>
                     <li><strong>Marco regulatório:</strong> Criação de leis e regulamentações que incentivem investimentos em energia limpa (ex.: Lei 14.300/2022 — microgeração solar).</li>
@@ -220,6 +267,7 @@
                     </p>
                 </div>
 
+                <!-- Hiperlinks de navegação interna entre páginas (exigência da APS) -->
                 <p>
                     <a href="contact.html">Entre em contato conosco</a> para saber mais ou compartilhar suas ideias sobre
                     o tema. Acesse também a página <a href="about.html">Sobre o Grupo</a> para conhecer os autores
@@ -228,12 +276,22 @@
             </div>
         </section>
 
-        <!-- Gráfico Interativo -->
+        <!-- =================================================================
+             SEÇÃO: GRÁFICO INTERATIVO
+             Usa a biblioteca Chart.js (carregada via CDN abaixo do <body>).
+             O <canvas> é o elemento nativo do HTML5 para desenho 2D.
+             O JavaScript em scripts.js detecta o canvas e instancia o gráfico
+             apenas se Chart estiver disponível (guard: typeof Chart !== 'undefined').
+             Dados: evolução percentual de Hídrica, Eólica e Solar (2015-2024).
+             Fonte: ANEEL / EPE / ONS — Balanço Energético Nacional.
+             ================================================================= -->
         <section class="section section-alt" id="grafico">
             <div class="container">
                 <h2>Evolução da Matriz Elétrica Brasileira</h2>
                 <p>Veja como solar e eólica cresceram expressivamente na geração elétrica do Brasil entre 2015 e 2024, enquanto a dependência de fontes não renováveis caiu:</p>
+                <!-- .chart-wrapper limita largura e adiciona fundo branco ao canvas -->
                 <div class="chart-wrapper">
+                    <!-- id="graficoMatriz" é o seletor usado pelo JavaScript para instanciar o Chart -->
                     <canvas id="graficoMatriz"></canvas>
                 </div>
                 <p class="table-note"><em>* Dados aproximados baseados em relatórios da ANEEL, EPE e ONS. Solar inclui micro e minigeração distribuída.</em></p>
@@ -264,6 +322,7 @@
         </div>
     </footer>
 
+    <!-- Chart.js deve ser carregado ANTES de scripts.js pois o JS referencia o objeto Chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts.js"></script>
 </body>

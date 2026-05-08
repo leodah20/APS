@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<!--
+    calculadora.html — Página de Ferramentas Interativas do EcoFuturo
+    Contém 3 abas controladas por JavaScript:
+      1. Calculadora de Pegada de Carbono
+      2. Simulador de Viabilidade Solar Residencial
+      3. Quiz sobre Energias Renováveis
+
+    O sistema de abas usa classes CSS (.active) alternadas via scripts.js (abrirTab()).
+    Os formulários não recarregam a página — resultados são injetados via innerHTML.
+    O quiz é inicializado apenas na primeira vez que a aba é aberta (lazy init).
+    Disciplina: Programação Web Responsiva (PWR) — APS 2026/1 — UNIP
+    Aluno: Leonardo Cordeiro Sutil — RA: N0368J0
+-->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +21,9 @@
 </head>
 <body>
 
+    <!-- =====================================================================
+         MENU DE NAVEGAÇÃO — .active em "Ferramentas" nesta página
+         ===================================================================== -->
     <div id="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
@@ -33,20 +49,34 @@
         <section class="section">
             <div class="container">
 
+                <!-- =============================================================
+                     NAVEGAÇÃO POR ABAS
+                     Cada botão chama abrirTab(id, this) em scripts.js.
+                     A função desativa todas as abas e ativa apenas a clicada.
+                     A aba .active inicial é "co2" — definida aqui no HTML.
+                     ============================================================= -->
                 <div class="tab-nav">
                     <button class="tab-btn active" onclick="abrirTab('co2', this)">Pegada de CO₂</button>
                     <button class="tab-btn" onclick="abrirTab('solar', this)">Simulador Solar</button>
                     <button class="tab-btn" onclick="abrirTab('quiz', this)">Quiz</button>
                 </div>
 
-                <!-- ===== ABA CO2 ===== -->
+                <!-- =============================================================
+                     ABA 1: CALCULADORA DE PEGADA DE CARBONO
+                     Formulário com 4 categorias de emissão. O campo de distância
+                     (#grupo-distancia) é ocultado via JavaScript quando o usuário
+                     seleciona "bicicleta", pois a distância não afeta o cálculo (emissão = 0).
+                     onchange="toggleDistancia(this)" chama a função em scripts.js.
+                     ============================================================= -->
                 <div id="tab-co2" class="tab-panel active">
                     <div class="form-page-wrapper">
                         <div class="form-container">
+                            <!-- onsubmit intercepta o envio e chama calcularCO2() no JS -->
                             <form id="form-co2" onsubmit="calcularCO2(event)">
                                 <h2>Calculadora de Pegada de Carbono</h2>
                                 <p>Descubra quanto CO₂ você emite por ano e veja como reduzir seu impacto.</p>
 
+                                <!-- Campo 1: Transporte — <select> com onchange para mostrar/ocultar distância -->
                                 <div class="form-group">
                                     <label for="transporte">Meio de transporte principal</label>
                                     <select id="transporte" name="transporte" onchange="toggleDistancia(this)" required>
@@ -59,8 +89,10 @@
                                     </select>
                                 </div>
 
+                                <!-- Campo 2: Distância — ocultado quando transporte = bicicleta -->
                                 <div class="form-group" id="grupo-distancia">
                                     <label>Distância percorrida por dia</label>
+                                    <!-- type="radio" com mesmo name agrupa as opções exclusivas -->
                                     <div class="radio-group">
                                         <label class="radio-label"><input type="radio" name="distancia" value="menos10"> Menos de 10 km</label>
                                         <label class="radio-label"><input type="radio" name="distancia" value="10a30"> 10 a 30 km</label>
@@ -69,6 +101,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Campo 3: Energia elétrica — faixas de valor da conta de luz -->
                                 <div class="form-group">
                                     <label for="energia">Valor médio da sua conta de luz por mês</label>
                                     <select id="energia" name="energia" required>
@@ -80,6 +113,7 @@
                                     </select>
                                 </div>
 
+                                <!-- Campo 4: Alimentação — radio com 4 perfis de dieta -->
                                 <div class="form-group">
                                     <label>Alimentação</label>
                                     <div class="radio-group">
@@ -90,6 +124,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Campo 5: Viagens aéreas — select com 4 faixas de frequência -->
                                 <div class="form-group">
                                     <label for="viagem">Viagens aéreas por ano</label>
                                     <select id="viagem" name="viagem" required>
@@ -103,12 +138,22 @@
 
                                 <button type="submit" class="btn-submit">Calcular minha pegada 🌍</button>
                             </form>
+                            <!-- Resultado injetado aqui via innerHTML pelo calcularCO2() em scripts.js -->
                             <div id="resultado-co2" style="display:none;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ===== ABA SOLAR ===== -->
+                <!-- =============================================================
+                     ABA 2: SIMULADOR DE VIABILIDADE SOLAR
+                     Usa dados reais de irradiação solar por estado (INPE/CRESESB).
+                     O cálculo segue metodologia da ABSOLAR:
+                       - kWp necessário baseado no consumo e irradiação local
+                       - Painéis de 550 W (padrão de mercado 2024)
+                       - Custo de R$ 4.800/kWp instalado
+                     Imóveis alugados recebem orientação sobre cooperativas solares
+                     (Lei 14.300/2022) em vez de resultado de instalação.
+                     ============================================================= -->
                 <div id="tab-solar" class="tab-panel">
                     <div class="form-page-wrapper">
                         <div class="form-container">
@@ -116,10 +161,12 @@
                                 <h2>Simulador de Viabilidade Solar</h2>
                                 <p>Descubra se vale a pena instalar energia solar na sua residência com dados reais do mercado brasileiro.</p>
 
+                                <!-- Estado determina o fator de irradiação solar usado no cálculo -->
                                 <div class="form-group">
                                     <label for="estado">Seu estado</label>
                                     <select id="estado" required>
                                         <option value="" disabled selected>Selecione...</option>
+                                        <!-- Todos os 27 estados e o DF, com valores de irradiação em scripts.js -->
                                         <option value="AC">Acre (AC)</option>
                                         <option value="AL">Alagoas (AL)</option>
                                         <option value="AM">Amazonas (AM)</option>
@@ -150,11 +197,13 @@
                                     </select>
                                 </div>
 
+                                <!-- Valor da conta é dividido por R$0,85 (preço médio kWh) para estimar consumo em kWh -->
                                 <div class="form-group">
                                     <label for="conta-solar">Valor médio da sua conta de luz (R$)</label>
                                     <input type="number" id="conta-solar" min="50" max="99999" placeholder="Ex: 350" required>
                                 </div>
 
+                                <!-- Tipo de imóvel determina se o cálculo de instalação ou cooperativa é exibido -->
                                 <div class="form-group">
                                     <label>Tipo de imóvel</label>
                                     <div class="radio-group">
@@ -165,17 +214,26 @@
 
                                 <button type="submit" class="btn-submit">Simular agora ☀️</button>
                             </form>
+                            <!-- Resultado da simulação injetado aqui via innerHTML pelo calcularSolar() -->
                             <div id="resultado-solar" style="display:none;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ===== ABA QUIZ ===== -->
+                <!-- =============================================================
+                     ABA 3: QUIZ INTERATIVO
+                     O container #quiz-container começa vazio.
+                     O JavaScript (iniciarQuiz()) preenche o HTML dinamicamente
+                     na primeira vez que esta aba é aberta.
+                     5 perguntas com 4 alternativas cada, feedback imediato e
+                     barra de progresso animada.
+                     ============================================================= -->
                 <div id="tab-quiz" class="tab-panel">
                     <div class="form-page-wrapper">
                         <div class="form-container">
                             <h2>Quiz: Energias Renováveis</h2>
                             <p>Teste seus conhecimentos sobre energias renováveis no Brasil. São 5 perguntas com feedback imediato.</p>
+                            <!-- Preenchido dinamicamente pelo JavaScript ao abrir a aba -->
                             <div id="quiz-container"></div>
                         </div>
                     </div>

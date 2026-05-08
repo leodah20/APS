@@ -1,20 +1,35 @@
 <!DOCTYPE html>
+<!--
+    index.html — Página inicial do EcoFuturo
+    Estrutura: Navbar (Flexbox) → Hero → Introdução → Tabela → Vídeo → FAQ (Accordion)
+    Disciplina: Programação Web Responsiva (PWR) — APS 2026/1 — UNIP
+    Aluno: Leonardo Cordeiro Sutil — RA: N0368J0
+-->
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport garante responsividade em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoFuturo — Energias Renováveis no Brasil</title>
+    <!-- CSS externo em arquivo separado, conforme exigência da APS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ===== MENU DE NAVEGAÇÃO — FLEXBOX (tag <div>) ===== -->
+    <!-- =====================================================================
+         MENU DE NAVEGAÇÃO
+         Implementado com <div> usando CSS Flexbox (exigência da APS).
+         position: sticky no CSS mantém o menu fixo no topo durante o scroll.
+         A classe .active marca a página atual para feedback visual ao usuário.
+         ===================================================================== -->
     <div id="navbar">
         <div class="nav-container">
+            <!-- Logotipo clicável que retorna à página inicial -->
             <a href="index.html" class="nav-brand">
                 <span class="brand-icon">🌱</span>
                 <span>EcoFuturo</span>
             </a>
+            <!-- Links de navegação entre as 5 páginas do site -->
             <div class="nav-links">
                 <a href="index.html" class="nav-link active">Início</a>
                 <a href="content.html" class="nav-link">O Tema</a>
@@ -25,27 +40,41 @@
         </div>
     </div>
 
-    <!-- ===== HERO ===== -->
+    <!-- =====================================================================
+         HERO — Seção de apresentação principal
+         Ocupa ~78vh para impacto visual imediato.
+         O badge .hero-eyebrow contextualiza o trabalho acadêmico.
+         O CTA (Call to Action) direciona ao conteúdo aprofundado.
+         ===================================================================== -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-eyebrow">APS 2026/1 — UNIP</div>
             <h1>Energias Renováveis</h1>
+            <!-- h2 abaixo do h1 mantém hierarquia semântica correta -->
             <h2>Construindo um Futuro Sustentável para o Brasil</h2>
             <p>
                 Explore as principais fontes de energia limpa e descubra como elas podem
+                <!-- <strong> para ênfase semântica, não apenas visual -->
                 <strong>transformar nossa relação com o meio ambiente</strong> e combater as
                 mudanças climáticas.
             </p>
+            <!-- Link estilizado como botão — <a> é mais acessível que <button> para navegação -->
             <a href="content.html" class="btn-primary">Explorar o Tema</a>
         </div>
     </section>
 
-    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <!-- <main> delimita o conteúdo principal da página para leitores de tela -->
     <main>
 
-        <!-- Introdução -->
+        <!-- =================================================================
+             SEÇÃO: INTRODUÇÃO
+             Apresenta o tema com tags semânticas de formatação de texto:
+             <strong> (negrito), <em> (itálico), <u> (sublinhado), <mark> (marcação)
+             — todas exigidas pela APS.
+             ================================================================= -->
         <section class="section" id="introducao">
             <div class="container">
+                <!-- h2 inicia o segundo nível de hierarquia de títulos -->
                 <h2>Por que as Energias Renováveis São Essenciais?</h2>
                 <p>
                     O mundo enfrenta uma <strong>crise climática urgente e sem precedentes</strong>.
@@ -60,7 +89,9 @@
                     de petróleo e gás natural.
                 </p>
 
+                <!-- h3: terceiro nível de hierarquia — exigência de ao menos 2 níveis diferentes -->
                 <h3>Principais Benefícios das Energias Renováveis</h3>
+                <!-- Lista desordenada <ul> — exigência da APS -->
                 <ul class="lista-beneficios">
                     <li>Redução drástica das emissões de CO₂ e gases de efeito estufa</li>
                     <li>Diversificação e segurança da matriz energética nacional</li>
@@ -70,7 +101,9 @@
                     <li>Redução progressiva dos custos de geração e armazenamento de energia</li>
                 </ul>
 
+                <!-- Cards com eventos JavaScript onmouseover/onmouseout (exigência: 2+ eventos) -->
                 <div class="cards-grid">
+                    <!-- Cada card dispara destacarCard() ao receber o mouse e normalCard() ao sair -->
                     <div class="card" onmouseover="destacarCard(this)" onmouseout="normalCard(this)">
                         <span class="card-label">Fonte renovável</span>
                         <h3>Solar Fotovoltaica</h3>
@@ -90,12 +123,18 @@
             </div>
         </section>
 
-        <!-- Tabela Comparativa -->
+        <!-- =================================================================
+             SEÇÃO: TABELA COMPARATIVA
+             Tabela HTML com thead/tbody, mínimo 5 linhas e 2 colunas (exigência APS).
+             A classe .section-alt aplica fundo alternado para separação visual.
+             Badges (<span class="badge">) classificam as fontes com cor semântica.
+             ================================================================= -->
         <section class="section section-alt" id="comparativo">
             <div class="container">
                 <h2>Comparativo das Fontes de Energia</h2>
                 <p>A tabela abaixo compara as principais características das fontes de energia utilizadas no Brasil e no mundo:</p>
 
+                <!-- .table-wrapper adiciona overflow-x:auto para responsividade em mobile -->
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -108,6 +147,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- .row-renovavel e .row-nao-renovavel colorem a primeira coluna por CSS -->
                             <tr class="row-renovavel">
                                 <td>Solar Fotovoltaica</td>
                                 <td><span class="badge badge-green">Renovável</span></td>
@@ -164,7 +204,13 @@
             </div>
         </section>
 
-        <!-- Vídeo -->
+        <!-- =================================================================
+             SEÇÃO: VÍDEO
+             Embed do YouTube via <iframe> com proporção 16:9 responsiva.
+             O wrapper usa padding-bottom: 56.25% (= 9/16) para manter a
+             proporção correta em qualquer largura de tela.
+             Atributos allow e referrerpolicy seguem as recomendações do YouTube.
+             ================================================================= -->
         <section class="section" id="video">
             <div class="container">
                 <h2>Assista e Aprenda</h2>
@@ -185,15 +231,24 @@
             </div>
         </section>
 
-        <!-- FAQ — Accordion (onclick) -->
+        <!-- =================================================================
+             SEÇÃO: FAQ — ACCORDION
+             Padrão de interação "accordion exclusivo": apenas um item aberto
+             por vez. Usa evento onclick inline que chama toggleAcordeon() em
+             scripts.js. O conteúdo fica oculto por CSS (display:none) e é
+             revelado via JavaScript ao adicionar a classe .open.
+             ================================================================= -->
         <section class="section section-alt" id="faq">
             <div class="container">
                 <h2>Perguntas Frequentes</h2>
 
                 <div class="accordion">
+                    <!-- Cada item tem: botão (trigger) + div oculta (conteúdo) -->
                     <div class="accordion-item">
+                        <!-- onclick passa o próprio botão como referência para o JS -->
                         <button class="accordion-btn" onclick="toggleAcordeon(this)">
                             <span>O que são energias renováveis?</span>
+                            <!-- Ícone + / − alternado via JavaScript -->
                             <span class="accordion-icon">+</span>
                         </button>
                         <div class="accordion-content">
@@ -236,8 +291,14 @@
 
     </main>
 
+    <!-- Toast de boas-vindas — preenchido e exibido via JavaScript (evento load) -->
     <div id="toast" class="toast"></div>
 
+    <!-- =====================================================================
+         RODAPÉ
+         Contém marca, descrição e navegação duplicada para acessibilidade.
+         A <nav> no footer usa tag semântica HTML5 para leitores de tela.
+         ===================================================================== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -258,6 +319,7 @@
         </div>
     </footer>
 
+    <!-- scripts.js carregado no final do <body> para não bloquear a renderização da página -->
     <script src="scripts.js"></script>
 </body>
 </html>
