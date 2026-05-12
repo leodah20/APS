@@ -62,28 +62,22 @@
                 </div>
 
                 <!-- =============================================================
-                     FOTO DO INTEGRANTE
-                     onerror="..." é um handler JavaScript inline que oculta a
-                     imagem e exibe o placeholder caso img/foto.jpg não exista.
-                     Isso garante que a página não quebre se a imagem for removida.
+                     PERFIL DO INTEGRANTE
+                     Layout em grid: foto circular à esquerda, informações à direita.
+                     onerror exibe placeholder SVG se img/foto.jpg não existir.
                      ============================================================= -->
-                <div class="group-photo-container">
-                    <img src="img/foto.jpg" alt="Foto do integrante" class="group-photo"
-                         onerror="this.style.display='none'; document.getElementById('foto-placeholder').style.display='flex';">
-                    <!-- Placeholder exibido apenas se a foto falhar ao carregar -->
-                    <div id="foto-placeholder" class="photo-placeholder" style="display:none;">
-                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="16" r="8"/><path d="M6 40c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
-                        <p>Adicione sua foto em <strong>img/foto.jpg</strong></p>
+                <div class="member-profile">
+                    <div class="member-photo-wrap">
+                        <img src="img/foto.jpg" alt="Foto de Leonardo Cordeiro Sutil" class="member-photo"
+                             onerror="this.style.display='none'; document.getElementById('foto-placeholder').style.display='flex';">
+                        <!-- Placeholder circular exibido apenas se a foto não carregar -->
+                        <div id="foto-placeholder" class="photo-placeholder-inline" style="display:none;">
+                            <svg width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="16" r="8"/><path d="M6 40c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
+                            <p>img/foto.jpg</p>
+                        </div>
                     </div>
-                </div>
-
-                <h2>Integrante</h2>
-
-                <!-- Card do membro com avatar CSS (iniciais em círculo, sem dependência de imagem) -->
-                <div class="members-grid">
-                    <div class="member-card">
-                        <!-- Avatar gerado por CSS: círculo verde com iniciais "LC" -->
-                        <div class="member-avatar">LC</div>
+                    <div class="member-info">
+                        <span class="card-label">Integrante</span>
                         <h3>Leonardo Cordeiro Sutil</h3>
                         <p class="member-ra">RA: N0368J0</p>
                         <p class="member-desc">
