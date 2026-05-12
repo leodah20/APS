@@ -91,7 +91,7 @@ function calcularSolar(event) {
     // Imóveis alugados não permitem instalação; orienta sobre cooperativas solares
     if (imovel === 'alugado') {
         resultadoDiv.innerHTML = '<div class="co2-resultado"><div class="co2-comparacao" style="border-left:4px solid var(--amarelo)">' +
-            '<h3>🏢 Imóvel alugado — alternativas disponíveis!</h3>' +
+            '<h3>Imóvel alugado — alternativas disponíveis</h3>' +
             '<p>Quem não tem telhado próprio ainda pode aproveitar energia solar por meio das <strong>Cooperativas de Energia Solar</strong> ou <strong>Microgeração Compartilhada</strong>, regulamentadas pela Lei 14.300/2022.</p>' +
             '<ul style="padding-left:1.25rem;margin-top:0.75rem">' +
             '<li>Você assina uma cota de geração em uma usina solar compartilhada</li>' +
@@ -101,7 +101,7 @@ function calcularSolar(event) {
             '</ul>' +
             '<p style="margin-top:1rem">Procure cooperativas de energia solar na sua região — é uma solução real e acessível!</p>' +
             '</div>' +
-            '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente 🔄</button>' +
+            '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente</button>' +
             '</div>';
         resultadoDiv.style.display = 'block';
         document.getElementById('form-solar').style.display = 'none';
@@ -139,12 +139,12 @@ function calcularSolar(event) {
         '</div>' +
         '<div class="co2-comparacao" style="border-left:4px solid ' + (viavel ? 'var(--verde)' : 'var(--amarelo)') + '">' +
             '<p>' + (viavel
-                ? '✅ <strong>Energia solar é altamente viável para você!</strong> Com retorno em ' + payback + ' anos e economia de R$ ' + economia25anos.toLocaleString('pt-BR') + ' ao longo de 25 anos, o investimento se paga com folga.'
-                : '⚠️ A viabilidade depende de condições específicas. Consulte um instalador certificado para uma análise personalizada do seu telhado.') +
+                ? '<strong>Energia solar é altamente viável para você!</strong> Com retorno em ' + payback + ' anos e economia de R$ ' + economia25anos.toLocaleString('pt-BR') + ' ao longo de 25 anos, o investimento se paga com folga.'
+                : 'A viabilidade depende de condições específicas. Consulte um instalador certificado para uma análise personalizada do seu telhado.') +
             '</p>' +
-            '<p>☀️ Irradiação solar no seu estado: <strong>' + irr + ' kWh/m²/dia</strong></p>' +
+            '<p>Irradiação solar no seu estado: <strong>' + irr + ' kWh/m²/dia</strong></p>' +
         '</div>' +
-        '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente 🔄</button>' +
+        '<button onclick="document.getElementById(\'form-solar\').reset();document.getElementById(\'resultado-solar\').style.display=\'none\';document.getElementById(\'form-solar\').style.display=\'block\'" class="btn-submit" style="background:#546e7a;margin-top:1rem">Simular novamente</button>' +
         '</div>';
 
     resultadoDiv.innerHTML = html;
@@ -214,7 +214,7 @@ function renderizarPergunta() {
     var q = quizPerguntas[quizIndex];
     var progresso = Math.round((quizIndex / quizPerguntas.length) * 100);
     var html = '<div class="quiz-progresso-bg"><div class="quiz-progresso-bar" style="width:' + progresso + '%"></div></div>' +
-        '<p class="quiz-contador">Pergunta ' + (quizIndex + 1) + ' de ' + quizPerguntas.length + ' &nbsp;|&nbsp; ✅ ' + quizPontos + ' corretas</p>' +
+        '<p class="quiz-contador">Pergunta ' + (quizIndex + 1) + ' de ' + quizPerguntas.length + ' &nbsp;|&nbsp; ' + quizPontos + ' corretas</p>' +
         '<h3 class="quiz-pergunta">' + q.p + '</h3>' +
         '<div class="quiz-opcoes">';
     q.o.forEach(function(op, i) {
@@ -250,9 +250,9 @@ function responderQuiz(idx) {
     var acertou     = (idx === q.c);
     var fb          = document.getElementById('quiz-feedback');
     fb.className    = 'quiz-feedback ' + (acertou ? 'feedback-ok' : 'feedback-erro');
-    var proximaLabel = (quizIndex < quizPerguntas.length - 1) ? 'Próxima →' : 'Ver resultado 🏆';
+    var proximaLabel = (quizIndex < quizPerguntas.length - 1) ? 'Próxima →' : 'Ver resultado';
     var proximaFn   = (quizIndex < quizPerguntas.length - 1) ? 'proximaPergunta()' : 'finalizarQuiz()';
-    fb.innerHTML    = (acertou ? '✅ Correto! ' : '❌ Errado. ') + q.e +
+    fb.innerHTML    = (acertou ? 'Correto! ' : 'Errado. ') + q.e +
         '<br><button class="btn-submit" style="margin-top:0.75rem;width:auto;padding:0.5rem 1.5rem" onclick="' + proximaFn + '">' + proximaLabel + '</button>';
     fb.style.display = 'block';
 }
@@ -266,20 +266,20 @@ function proximaPergunta() { quizIndex++; renderizarPergunta(); }
  */
 function finalizarQuiz() {
     var pct = Math.round((quizPontos / quizPerguntas.length) * 100);
-    var msg, emoji;
-    if (pct === 100)      { msg = 'Perfeito! Você é um expert em energias renováveis!'; emoji = '🏆'; }
-    else if (pct >= 60)   { msg = 'Muito bem! Você tem bom conhecimento sobre o tema.'; emoji = '🌟'; }
-    else                  { msg = 'Continue estudando! Explore o conteúdo do site para aprender mais.'; emoji = '📚'; }
+    var msg;
+    if (pct === 100)      { msg = 'Perfeito! Você é um expert em energias renováveis!'; }
+    else if (pct >= 60)   { msg = 'Muito bem! Você tem bom conhecimento sobre o tema.'; }
+    else                  { msg = 'Continue estudando! Explore o conteúdo do site para aprender mais.'; }
 
     document.getElementById('quiz-container').innerHTML =
         '<div class="quiz-resultado">' +
-        '<div class="quiz-score">' + emoji +
+        '<div class="quiz-score">' +
         '<span class="quiz-pontos">' + quizPontos + '/' + quizPerguntas.length + '</span>' +
         '<span class="quiz-pct">' + pct + '% de acerto</span></div>' +
         '<p>' + msg + '</p>' +
         '<div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">' +
-        '<button class="btn-submit" style="width:auto;padding:0.6rem 1.5rem" onclick="iniciarQuiz()">Jogar novamente 🔄</button>' +
-        '<a href="content.html" class="btn-submit" style="width:auto;padding:0.6rem 1.5rem;text-decoration:none">Estudar mais 📖</a>' +
+        '<button class="btn-submit" style="width:auto;padding:0.6rem 1.5rem" onclick="iniciarQuiz()">Jogar novamente</button>' +
+        '<a href="content.html" class="btn-submit" style="width:auto;padding:0.6rem 1.5rem;text-decoration:none">Estudar mais</a>' +
         '</div></div>';
 }
 
@@ -300,9 +300,9 @@ window.addEventListener('load', function() {
                 labels: ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
                 datasets: [
                     // 2021 registrou queda hídrica por seca histórica, evidenciando risco de concentração
-                    { label: '💧 Hídrica (%)', data: [68,65,66,66,65,66,56,61,58,54], borderColor:'#1565C0', backgroundColor:'rgba(21,101,192,0.1)', tension:0.4, fill:true },
-                    { label: '💨 Eólica (%)',  data: [5,6,8,9,9,10,12,13,14,15],      borderColor:'#2e9955', backgroundColor:'rgba(46,153,85,0.1)',  tension:0.4, fill:true },
-                    { label: '☀️ Solar (%)',   data: [0.1,0.2,0.5,1,1.5,2,3,5,8,12], borderColor:'#f9a825', backgroundColor:'rgba(249,168,37,0.1)', tension:0.4, fill:true }
+                    { label: 'Hídrica (%)', data: [68,65,66,66,65,66,56,61,58,54], borderColor:'#1565C0', backgroundColor:'rgba(21,101,192,0.1)', tension:0.4, fill:true },
+                    { label: 'Eólica (%)',  data: [5,6,8,9,9,10,12,13,14,15],      borderColor:'#2e9955', backgroundColor:'rgba(46,153,85,0.1)',  tension:0.4, fill:true },
+                    { label: 'Solar (%)',   data: [0.1,0.2,0.5,1,1.5,2,3,5,8,12], borderColor:'#f9a825', backgroundColor:'rgba(249,168,37,0.1)', tension:0.4, fill:true }
                 ]
             },
             options: {
@@ -433,10 +433,10 @@ function calcularCO2(event) {
     var mediaMundial = 4.7;  // t/ano — Our World in Data 2023
 
     // Classificação por nível de emissão relativo às médias de referência
-    var nivel, cor, emoji;
-    if (total <= 2200)      { nivel = 'Baixa';    cor = '#2e9955'; emoji = '🟢'; }
-    else if (total <= 4700) { nivel = 'Moderada'; cor = '#f9a825'; emoji = '🟡'; }
-    else                    { nivel = 'Alta';     cor = '#e53935'; emoji = '🔴'; }
+    var nivel, cor;
+    if (total <= 2200)      { nivel = 'Baixa';    cor = '#2e9955'; }
+    else if (total <= 4700) { nivel = 'Moderada'; cor = '#f9a825'; }
+    else                    { nivel = 'Alta';     cor = '#e53935'; }
 
     // Identifica a maior fonte de emissão para personalizar a dica principal
     var maiorFonte = 'Transporte';
@@ -462,41 +462,41 @@ function calcularCO2(event) {
 
     var comparacaoTexto = '';
     if (total < mediaBR * 1000) {
-        comparacaoTexto = '✅ Você emite <strong>menos que a média brasileira</strong> de ' + mediaBR + ' t/ano. Parabéns!';
+        comparacaoTexto = 'Você emite <strong>menos que a média brasileira</strong> de ' + mediaBR + ' t/ano. Parabéns!';
     } else if (total < mediaMundial * 1000) {
-        comparacaoTexto = '⚠️ Você emite <strong>mais que a média brasileira</strong> (' + mediaBR + ' t), mas abaixo da média mundial (' + mediaMundial + ' t).';
+        comparacaoTexto = 'Você emite <strong>mais que a média brasileira</strong> (' + mediaBR + ' t), mas abaixo da média mundial (' + mediaMundial + ' t).';
     } else {
-        comparacaoTexto = '❌ Você emite <strong>acima da média mundial</strong> de ' + mediaMundial + ' t/ano. Pequenas mudanças fazem grande diferença!';
+        comparacaoTexto = 'Você emite <strong>acima da média mundial</strong> de ' + mediaMundial + ' t/ano. Pequenas mudanças fazem grande diferença!';
     }
 
     var html = '<div class="co2-resultado">' +
         '<h3>Sua pegada de carbono estimada</h3>' +
         '<div class="co2-total" style="border-color:' + cor + '">' +
-            '<span class="co2-numero" style="color:' + cor + '">' + emoji + ' ' + totalT + '</span>' +
+            '<span class="co2-numero" style="color:' + cor + '">' + totalT + '</span>' +
             '<span class="co2-unidade">toneladas de CO₂ por ano</span>' +
             '<span class="co2-nivel" style="background:' + cor + '">' + nivel + '</span>' +
         '</div>' +
         '<h4 style="margin-top:1.5rem">Origem das emissões</h4>' +
-        barra('🚗 Transporte', co2Transporte, total) +
-        barra('⚡ Energia elétrica', co2Energia, total) +
-        barra('🥩 Alimentação', co2Dieta, total) +
-        barra('✈️ Viagens aéreas', co2Viagem, total) +
+        barra('Transporte', co2Transporte, total) +
+        barra('Energia elétrica', co2Energia, total) +
+        barra('Alimentação', co2Dieta, total) +
+        barra('Viagens aéreas', co2Viagem, total) +
         '<div class="co2-comparacao">' +
             '<p>' + comparacaoTexto + '</p>' +
             '<div class="co2-medias">' +
-                '<span>🇧🇷 Média brasileira: <strong>' + mediaBR + ' t/ano</strong></span>' +
-                '<span>🌍 Média mundial: <strong>' + mediaMundial + ' t/ano</strong></span>' +
+                '<span>Média brasileira: <strong>' + mediaBR + ' t/ano</strong></span>' +
+                '<span>Média mundial: <strong>' + mediaMundial + ' t/ano</strong></span>' +
             '</div>' +
         '</div>' +
         '<div class="co2-dicas">' +
-            '<h4>💡 Como reduzir sua pegada</h4>' +
+            '<h4>Como reduzir sua pegada</h4>' +
             '<ul>' +
                 '<li>' + dicasTransporte[transporte] + '</li>' +
                 '<li>' + dicasDieta[dieta] + '</li>' +
                 '<li>Seu maior impacto individual está em <strong>' + maiorFonte + '</strong>. Começar por aí é o caminho mais eficiente.</li>' +
             '</ul>' +
         '</div>' +
-        '<button onclick="resetCalculadora()" class="btn-submit" style="background:#546e7a;margin-top:1rem">Calcular novamente 🔄</button>' +
+        '<button onclick="resetCalculadora()" class="btn-submit" style="background:#546e7a;margin-top:1rem">Calcular novamente</button>' +
     '</div>';
 
     var resultado = document.getElementById('resultado-co2');
@@ -642,6 +642,6 @@ function validarFormulario(event) {
     .finally(function() {
         // Reativa o botão independentemente do resultado, para nova tentativa
         btn.disabled    = false;
-        btn.textContent = 'Enviar Mensagem ✉️';
+        btn.textContent = 'Enviar Mensagem';
     });
 }
