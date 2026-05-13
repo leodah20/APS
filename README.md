@@ -46,11 +46,6 @@ O site aborda o tema **Energias Renováveis no Brasil**, apresentando fontes de 
 | Instituição | Universidade Paulista — UNIP |
 | Curso | Ciência da Computação — 8º Semestre |
 | Disciplina | Programação Web Responsiva (PWR) — APS 2026/1 |
-| Professor | Thiago Carvalho Sousa |
-| Aluno | Leonardo Cordeiro Sutil |
-| RA | N0368J0 |
-| Apresentação | 13 de maio de 2026 |
-| Entrega | 23 de maio de 2026 |
 
 ## Como executar
 
